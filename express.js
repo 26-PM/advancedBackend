@@ -11,6 +11,16 @@ app.use(function (req, res, next) {
 
 app.get("/", function (req, res) {
     res.send("Hello World!");
-}); 
+});
 
-app.listen(3001);
+app.get("/error",function(req,res,next){
+    return next(new Error("/error is under maintenance."));
+});
+
+
+app.use((err, req, res, next) => {
+    console.error(err.stack)
+    res.status(500).send('Something broke!')
+  })
+  
+app.listen(3000);
