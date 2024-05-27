@@ -1,6 +1,9 @@
 const express = require("express");
 const app = express();
 
+app.use(express.json());
+app.use(express.urlencoded({extended:true}));
+
 // app.use(express.static("public"));
 
 // Middleware 
@@ -12,6 +15,8 @@ app.use(function (req, res, next) {
 app.get("/", function (req, res) {
     res.send("Hello World!");
 });
+
+// Error Handling
 
 app.get("/error",function(req,res,next){
     return next(new Error("/error is under maintenance."));
